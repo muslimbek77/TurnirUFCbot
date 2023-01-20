@@ -18,17 +18,17 @@ async def janglar_uchun_ovoz_berish(message: types.Message, state=FSMContext):
         # print(message)
         id  = await db.select_user(tg_id=message.from_user.id)
         tr = 1
-        await message.answer("🤼 Mavjud UCF janglarga kim g'olib bo'lishiga ovoz bering", reply_markup=ReplyKeyboardRemove())
-        text = "🤼 Janglar\n(🔱 -  sizning tanlovlaringiz)\n\n"
+        await message.answer("👊 Mavjud UFC janglarga kim g'olib bo'lishiga ovoz bering", reply_markup=ReplyKeyboardRemove())
+        text = "👊 Janglar\n(✅ -  sizning tanlovlaringiz)\n\n"
         for war in wars:
             voice = await db.select_voice(id[0], war[0])
             try:
                 if voice[3]==war[1]:
-                    fir = "🔱"
+                    fir = "✅"
                     sec = ""
                 elif voice[3]==war[2]:
                     fir = ""
-                    sec = "🔱"
+                    sec = "✅"
             except:
                     fir = ""
                     sec = ""
@@ -88,12 +88,12 @@ async def change_(call: CallbackQuery, state=FSMContext):
             {"war": war_id}
     )
                     
-        text += f"🔱 Kim g'olib bo'ladi 🔱\n"
+        text += f"✅ Kim g'olib bo'ladi ✅\n"
         await bot.send_photo(call.from_user.id, war[4], text, reply_markup=war_winner_2(name1, name2))
         await state.set_state("user_select_winner_2")
     else:
         await call.answer()
-        text += f"🔱 G'olib: {war[6]}"
+        text += f"✅ G'olib: {war[6]}"
         await bot.send_photo(call.from_user.id, war[4], f"Jang o'z nihoyasiga yetgan.\n\n{text}")
         # await call.message.answer()
         await state.set_state("user_select_winner")
@@ -129,17 +129,17 @@ async def change_(call: CallbackQuery, state=FSMContext):
     wars = await db.select_all_wars()
     
     tr = 1
-    await call.message.answer("🤼 Mavjud UCF janglarga kim g'olib bo'lishiga ovoz bering", reply_markup=ReplyKeyboardRemove())
-    text = "🤼 Janglar\n(🔱 -  sizning tanlovlaringiz)\n\n"
+    await call.message.answer("👊 Mavjud UCF janglarga kim g'olib bo'lishiga ovoz bering", reply_markup=ReplyKeyboardRemove())
+    text = "👊 Janglar\n(✅ -  sizning tanlovlaringiz)\n\n"
     for war in wars:
         voice = await db.select_voice(id[0], war[0])
         try:
             if voice[3]==war[1]:
-                fir = "🔱"
+                fir = "✅"
                 sec = ""
             elif voice[3]==war[2]:
                 fir = ""
-                sec = "🔱"
+                sec = "✅"
         except:
                 fir = ""
                 sec = ""
@@ -159,7 +159,7 @@ async def change_(call: CallbackQuery, state=FSMContext):
         
         
 
-@dp.message_handler(text="🔱 Yig'ilgan ball", state=None)
+@dp.message_handler(text="🎯 Yig'ilgan ball", state=None)
 async def janglar_uchun_ovoz_berish(message: types.Message, state=FSMContext):
     ball = await db.select_user(tg_id = message.from_user.id)
     await message.answer(f"<i> {message.from_user.full_name} sizning jami to'plagan balingiz: {ball[5]} ball</i>")
@@ -170,11 +170,12 @@ async def janglar_uchun_ovoz_berish(message: types.Message, state=FSMContext):
 @dp.message_handler(text="🤖 Bot haqida", state=None)
 async def janglar_uchun_ovoz_berish(message: types.Message, state=FSMContext):
     text = f"Assalomu alaykum {message.from_user.full_name}.\n\n"
-    text += f"Bu bot UFC janglarida chempionatlar o'tkazish uchun tayyorlangan bot hisoblanadi.\n"
-    text += f"Bu bot yordamida siz yaqinda bo'lib o'tadigan UFC janglarda kim g'olib bo'lishini tahmin qilasiz va har bir to'g'ri topganingizga 5 balldan yig'ib borasiz. Chempionat tugashi bilan eng ko'p ball to'plagan ishtirokchi g'olib bo'ladi va turli sovg'alarni qo'lga kiritish imkoniyatiga ega bo'ladi. Shunday ekan o'yinda omadingizni bersin\n\n"
-    text += f"🤖 @ufc270bot "
-    
-    await message.answer(f"<code>{text}</code>")
+    text += "Bu bot orqali «UFC Fantasy» turnirida ishtirok etib siz o‘z menejerlik qobiliyatingizni namoyon etishingiz va vaqtingizni maroqli o‘tkazgan holda sovrinlarga ega bo‘lishingiz mumkin.\n\n"
+
+    text +="Turnirlarda ishtirok etish mutloq bepul. Buning uchun siz, bizning botimizda ishtirok etish tugmasini bosishingiz kerak bo‘ladi.\n\n"
+
+    text +="MIXSPORT telegram kanaliga o‘ting va batafsil ma’lumotni oling.\n"
+    await message.answer(f"{text}\n🤖  @mixsportuz_bot\n📣  @mixsportuzb ")
     
     
 

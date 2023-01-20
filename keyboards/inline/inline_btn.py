@@ -47,8 +47,8 @@ def war_winner(name1, name2):
     war_check = InlineKeyboardMarkup(
             inline_keyboard=[
             [
-                InlineKeyboardButton(text=f"🔱 {name1}", callback_data=f"{name1}"),
-                InlineKeyboardButton(text=f"🔱 {name2}", callback_data=f"{name2}"),
+                InlineKeyboardButton(text=f"✅ {name1}", callback_data=f"{name1}"),
+                InlineKeyboardButton(text=f"✅ {name2}", callback_data=f"{name2}"),
                 
                 
             ],
@@ -73,8 +73,8 @@ def war_winner_2(name1, name2):
     war_check = InlineKeyboardMarkup(
             inline_keyboard=[
             [
-                InlineKeyboardButton(text=f"🔱 {name1}", callback_data=f"{name1}"),
-                InlineKeyboardButton(text=f"🔱 {name2}", callback_data=f"{name2}"),
+                InlineKeyboardButton(text=f"✅ {name1}", callback_data=f"{name1}"),
+                InlineKeyboardButton(text=f"✅ {name2}", callback_data=f"{name2}"),
                 
                 
             ],

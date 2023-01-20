@@ -38,7 +38,7 @@ async def get_all_reklama(msg:types.Message,state:FSMContext):
     
 @dp.message_handler(text="/start", user_id=ADMINS, state="*")
 async def send_ad_to_all(message: types.Message):
-    await db.create()
+    # await db.create()
     
     try:
     # await db.add_user(122654789, "Jonibek 2", "@Yorqulov", 123456789)
@@ -53,20 +53,20 @@ async def send_ad_to_all(message: types.Message):
     
     
 
-@dp.message_handler(text="🤼‍♂️ UFC Janglar")
+@dp.message_handler(text="👊 UFC Janglar")
 async def send_ad_to_all(message: types.Message):
     try:
-        await message.reply("🤼 Mavjud UCF janglar ")
-        # await db.create()
+        await message.reply("👊 Mavjud UCF janglar ")
+        await db.create()
         wars = await db.select_all_wars()
         tr = 1
-        text = "🤼 Janglar\n\n"
+        text = "👊 Janglar\n\n"
         for war in wars:
             if war[6]:
-                win = f"🔱 G'olib:  <b>{war[6]}</b>\n⚔️ Xisob:  {war[5]}\n"
+                win = f"✅ G'olib:  <b>{war[6]}</b>\n📊 Xisob:  {war[5]}\n"
             else:
                 win = ""
-            text += f"{tr}. 🥊 {war[1]} - 🥊 {war[2]} \n"
+            text += f"{tr}. {war[1]} - {war[2]} \n"
             text += win
             text += f"📅 Sana: \t{war[3]}\n\n"
             tr += 1
@@ -143,8 +143,8 @@ async def send_ad_to_all(message: types.Message, state=FSMContext):
     second_name = data.get("second_name")
     war_date = data.get("war_date")
     
-    # text = f"\t 🤼‍♂️  \n\n"
-    text = f"🤼\n🥊 {first_name} - 🥊 {second_name} \n\n"
+    # text = f"\t 👊‍♂️  \n\n"
+    text = f"{first_name} - {second_name} \n\n"
     text += f"📅 Sana: \t{war_date}\n\n"
     text += f"Ma'lumotlar to'grimi?"
     
@@ -196,10 +196,10 @@ async def delete_war_func(message: types.Message, state=FSMContext):
     # await db.create()
     wars = await db.select_all_wars()
     tr = 1
-    text = "🤼 Janglar\n\n"
+    text = "👊 Janglar\n\n"
     for war in wars:
         
-        text += f"{war[0]}. 🥊 {war[1]} - 🥊 {war[2]} \n"
+        text += f"{war[0]}. {war[1]} - {war[2]} \n"
         text += f"📅 Sana: \t{war[3]}\n\n"
         tr += 1
     await message.answer(text, reply_markup=inline_wars_btn(wars))
@@ -224,7 +224,7 @@ async def change_(call: CallbackQuery, state=FSMContext):
     war = await db.select_war(id=int(id))
     
     # print(war[0])
-    text = f"🤼\n🥊 {war[1]} - 🥊 {war[2]} \n\n"
+    text = f" {war[1]} -  {war[2]} \n\n"
     text += f"📅 Sana: \t{war[3]}\n\n"
     text += f"Xaqiqatdan ham jangni ro'yxatdan ochirib tashlamoqchimisiz?"
     
@@ -308,20 +308,20 @@ async def send_ad_to_all(message: types.Message):
     
     
     ####################### jang hisobini o'zgartishi bo'limi boshlanishi $##################################
-@dp.message_handler(text="⚔️ Jang hisobi", user_id=ADMINS)
+@dp.message_handler(text="📝 Jang hisobi", user_id=ADMINS)
 async def golibni_aniqlash_wardan(message: types.Message, state=FSMContext):
     # await message.answer("Assalommu alaykum hurmatli Admin", reply_markup=admin_main)
     await message.answer("Qaysi jangni hisobini o'zgartirmoqchisiz", reply_markup=ReplyKeyboardRemove())
     # await db.create()
     wars = await db.select_all_wars()
     tr = 1
-    text = "🤼 Janglar\n\n"
+    text = "👊 Janglar\n\n"
     for war in wars:
         if war[6]:
-            win = f"🔱 G'olib:  <b>{war[6]}</b>\n⚔️ Xisob:  {war[5]}\n"
+            win = f"✅ G'olib:  <b>{war[6]}</b>\n📝 Xisob:  {war[5]}\n"
         else:
             win = ""
-        text += f"{tr}. 🥊 {war[1]} - 🥊 {war[2]} \n"
+        text += f"{tr}. {war[1]} -  {war[2]} \n"
         text += win
         text += f"📅 Sana: \t{war[3]}\n\n"
         tr += 1
@@ -358,9 +358,9 @@ async def golibni_aniqlash_war(call: CallbackQuery, state=FSMContext):
     await state.update_data(
         {"name2": name2}
     )
-    text = f"\n🥊 {name1}   ⚔️   🥊 {name2} \n\n"
+    text = f"\n {name1}  🤜🤛🏾   {name2} \n\n"
     # text += f"📅 Sana: \t{war[3]}\n\n"
-    text += f" 🔱 Kim g'olib bo'ldi 🔱"
+    text += f"  Kim g'olib bo'ldi "
     
     await bot.send_photo(call.from_user.id, war[4], text, reply_markup=war_winner(name1, name2))
     await state.set_state("change_war_winner")
@@ -410,12 +410,12 @@ async def change_(call: CallbackQuery, state=FSMContext):
     name2 = data.get("name2")
     winner = call.data
     print(winner)
-    await call.message.answer(f"🔱 {winner} 🔱 - g'olib")
+    await call.message.answer(f" {winner} ✅ - g'olib")
     await state.update_data(
         {"winner": winner}
     )
     
-    await call.message.answer(f"Ochkolar hisobini kiriting: \n\n🥊 {name1}   ⚔️   🥊 {name2} \n[xx-xx    :    xx-xx]")
+    await call.message.answer(f"Ochkolar hisobini kiriting: \n\n {name1}   🤜🤛🏾    {name2} \n[xx-xx    :    xx-xx]")
     await state.set_state("change_war_score")
 
         
@@ -466,7 +466,7 @@ async def send_ad_to_all(message: types.Message, state=FSMContext):
 @dp.message_handler(text="📊 Reyting")
 async def send_ad_to_all(message: types.Message):
     raiting = await db.select_raiting()
-    text = f"🔱 G'oliblarni to'g'ri topgan top 20 kishi:\n\n"
+    text = f"📊 G'oliblarni to'g'ri topgan top 20 kishi:\n\n"
     tr = 1
     for i in raiting:
         if i[3]:
@@ -474,7 +474,7 @@ async def send_ad_to_all(message: types.Message):
         else: 
             text += f"{tr}. <a href='tg://user?id={i[1]}'> {i[2]} </a> - {i[5]} ball\n"
         tr += 1
-    text += "\n 🤖 @ufc270bot"
+    text += "\n 🤖 https://t.me/mixsportuz_bot"
     await message.answer(text)
     
     
@@ -492,14 +492,14 @@ async def send_ad_to_all(message: types.Message):
     
     
     
-@dp.message_handler(text="⛓ Kanallar ro'yxati", user_id=ADMINS)
+@dp.message_handler(text="📣 Kanallar ro'yxati", user_id=ADMINS)
 async def send_ad_to_all(message: types.Message):
     await message.answer("Majburiy a'zolik kanallari")
     channels = await db.select_all_channels()
-    text = "⛓ Kanallar ro'yxati:\n\n"
+    text = "📣 Kanallar ro'yxati:\n\n"
     tr = 1
     for chanel in channels:
-        text += f"⛓ {tr} - {chanel[1]}\n⛓ Link: {chanel[2]}\n\n"
+        text += f"📣 {tr} - {chanel[1]}\n📣 Link: {chanel[2]}\n\n"
         tr += 1
     await message.answer(text)
         
@@ -551,11 +551,11 @@ async def send_ad_to_all(message: types.Message, state = FSMContext):
     await message.answer("Majburiy a'zolik kanallari", reply_markup=ReplyKeyboardRemove())
     channels = await db.select_all_channels()
     text = "Qaysi kanallarni majburiy a'zolikdan olib tashlamoqchisiz:\n\n"
-    text += "⛓ Kanallar ro'yxati:\n\n"
+    text += "📣 Kanallar ro'yxati:\n\n"
     tr = 1
     # print(channels)
     for chanel in channels:
-        text += f"⛓ {tr} - {chanel[1]}\n⛓ Link: {chanel[2]}\n\n"
+        text += f"📣 {tr} - {chanel[1]}\n📣 Link: {chanel[2]}\n\n"
         tr += 1
     await message.answer(text, reply_markup=inline_wars_btn(channels))
         
