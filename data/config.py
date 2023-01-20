@@ -15,7 +15,7 @@
 # DB_HOST = env.str("DB_HOST")
 
 
-# CHANNELS = []
+CHANNELS = []
 # # CHANNELS = ["-1001362625884", "-1001820104348"]
 
 import os
